@@ -27,11 +27,21 @@ func main() {
     }
 
     // get a reader to configuration
-    rdr, err := client.Raw()
-
+    rpd, err := client.Raw()
+    if err != nil {
+        panic(err)
+    }
+    
+    if rpd == nil {
+        panic("get cloud config error")
+    }
+	
     // or, decode configuration directly into a struct
     var appConfig applicationConfig
-    err := client.Decode(&appConfig)
+    err = client.Decode(&appConfig)
+    if err != nil {
+        panic(err)
+    }
 }
 ```
 
